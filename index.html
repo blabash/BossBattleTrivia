@@ -10,53 +10,16 @@
     <div class ="canvas-container">
         <canvas id="canvas"></canvas>
         <script src="./bundle.js"></script>
+        
         <video id="video" loop autoplay muted>
             <source src="./assets/the-firelord.webm" type="video/webm">
         </video>
     </div>
-
-    <div id="stage">
-        <div id="container">
-            <div id="game-container">
-                <div id="game-header">
-                    <div class="left-questions">
-                        <div class="container"><span></span></div>
-                    </div>
-                    <div class="left-timer">
-                        <div class="container">TIME: <span></span></div>
-                    </div>
-                    <div class="left-score">
-                        <div class="container">SCORE: <span></span></div>
-                    </div>
-                </div>
-                <div id="game-options">
-                    <div class="row">
-                        <div class="left-half">
-                            <div class="container"><button id="button-one" data-index="0"></button></div>
-                        </div>
-                        <div class="left-half">
-                            <div class="container"><button id="button-two" data-index="1"></button></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="left-half">
-                            <div class="container"><button id="button-three" data-index="2"></button></div>
-                        </div>
-                        <div class="left-half">
-                            <div class="container"><button id="button-four" data-index="3"></button></div>
-                        </div>
-                    </div>
-                </div>
-                <h1 id="title">Boss Battle Trivia</h1>
-            </div>
-            <button id="start-button">Fire it Up</button>
-        </div>
-    </div>
-
-    <div id="modal">
-        <div class="modal-message">
-            <p></p>
-        </div>
-    </div>
+    
+    <iframe src="assets/1secondofsilence.mp3" allow="autoplay" id="one-sec-silence"></iframe>
+    <audio id="player" autoplay controls><source src="assets/RagnarosBossBattle(64kbps).mp3" type="audio/mp3"></audio>
+    
+    <h1>Boss Battle Trivia</h1>
+    <button>Fire it Up</button>
 </body>
 </html>
