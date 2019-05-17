@@ -14,7 +14,19 @@ Background(ctx);
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-})
+});
+
+const video = document.querySelector("video");
+
+if (video) {
+    video.addEventListener('load', () => {
+        function step() {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+            requestAnimationFrame(step)
+        }
+        requestAnimationFrame(step);
+    })
+}
 
 //rectangle/square
 // ctx.fillStyle = "rgba(255, 0, 0, .5";

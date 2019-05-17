@@ -1,17 +1,17 @@
 
 
-const mouse = {
-    x: undefined,
-    y: undefined
-}
 
-const colorArray = [ //blue flame color palette
+const colorArray = [ //flame color palette
     "rgb(255, 0, 0, .05)",
     "rgb(255, 90, 0, .05)",
     "rgb(255, 154, 0, .05)"
 ]
 
 //interactivity for when mouse is near circle
+// const mouse = {
+//     x: undefined,
+//     y: undefined
+// }
 // window.addEventListener('mousemove', (e) => {
 //     console.log(e) 
 //     mouse.x = e.x;
