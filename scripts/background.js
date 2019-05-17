@@ -1,4 +1,24 @@
 
+
+const mouse = {
+    x: undefined,
+    y: undefined
+}
+
+const colorArray = [ //blue flame color palette
+    "rgb(255, 0, 0, .05)",
+    "rgb(255, 90, 0, .05)",
+    "rgb(255, 154, 0, .05)"
+]
+
+//interactivity for when mouse is near circle
+// window.addEventListener('mousemove', (e) => {
+//     console.log(e) 
+//     mouse.x = e.x;
+//     mouse.y = e.y;
+// })
+
+
 function Circle(x, y, dx, dy, radius, ctx) {
     this.x = x;
     this.y = y;
@@ -6,11 +26,12 @@ function Circle(x, y, dx, dy, radius, ctx) {
     this.dy = dy;
     this.radius = radius;
     this.ctx = ctx;
+    this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
     this.draw = function () {
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        this.ctx.fillStyle = "rgba(255, 0, 0, .1";
+        this.ctx.fillStyle = this.color;
         this.ctx.fill();
     }
 
@@ -25,6 +46,16 @@ function Circle(x, y, dx, dy, radius, ctx) {
         this.x += this.dx;
         this.y += this.dy;
 
+        //interactivity when mouse is near a circle
+        // if (mouse.x - this.x < 50 && mouse.x - this.x > -50
+        //     && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+        //     if (this.radius < 40) {
+        //         this.radius += 1;
+        //     }
+        // } else if (this.radius > 10) {
+        //     this.radius -= 1;
+        // }
+        
         this.draw();
     }
 }
@@ -39,8 +70,8 @@ function Background(ctx) {
         let radius = Math.random() * 30;
         let x = Math.random() * (innerWidth - radius * 2) + radius;
         let y = Math.random() * (innerHeight - radius * 2) + radius;
-        let dx = (Math.random() - .5) * 0.8;
-        let dy = (Math.random() - .5) * 2;
+        let dx = (Math.random() - .5) * 0.5;
+        let dy = (Math.random() - .5) * 0.3;
     
         circleArray.push(new Circle(x, y, dx, dy, radius, this.ctx));
     }
