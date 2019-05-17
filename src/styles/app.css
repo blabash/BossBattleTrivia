@@ -13,5 +13,5 @@ body {
   right: 0%;
   height: 600px;
   width: 1000px;
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 48% 78%, black 40%, transparent 50%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 120% at 65% 40%, black 25%, transparent 50%);
 }

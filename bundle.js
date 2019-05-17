@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"canvas {\\n    border: 1px solid black;\\n    background: rgb(3, 0, 12);\\n}\\n\\nbody {\\n    margin: 0;\\n}\\n\\n#video {\\n  position:absolute;\\n  top: 0%;\\n  right: 0%;\\n  height: 600px;\\n  width: 1000px;\\n  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 48% 78%, black 40%, transparent 50%);\\n}\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./src/styles/app.css?./node_modules/css-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"canvas {\\n    border: 1px solid black;\\n    background: rgb(3, 0, 12);\\n}\\n\\nbody {\\n    margin: 0;\\n}\\n\\n#video {\\n  position:absolute;\\n  top: 0%;\\n  right: 0%;\\n  height: 600px;\\n  width: 1000px;\\n  -webkit-mask-image: radial-gradient(ellipse 95% 120% at 65% 40%, black 25%, transparent 50%);\\n}\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./src/styles/app.css?./node_modules/css-loader/dist/cjs.js");
 
 /***/ }),
 
