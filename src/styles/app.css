@@ -7,19 +7,11 @@ body {
     margin: 0;
 }
 
-.canvas-container{
-  /* position: relative; */
-  /* width: 500px;
-  height: 500px; */
-}
-#canvas {
-  /* position: absolute;
-  background-color:lightgrey */
-}
 #video {
   position:absolute;
   top: 0%;
   right: 0%;
   height: 600px;
   width: 1000px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 48% 78%, black 40%, transparent 50%);
 }

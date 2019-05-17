@@ -2,9 +2,9 @@
 
 
 const colorArray = [ //flame color palette
-    "rgb(255, 0, 0, .05)",
-    "rgb(255, 90, 0, .05)",
-    "rgb(255, 154, 0, .05)"
+    "rgb(255, 0, 0, .08)",
+    "rgb(255, 90, 0, .08)",
+    "rgb(255, 154, 0, .08)"
 ];
 
 //interactivity for when mouse is near circle
