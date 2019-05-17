@@ -16,6 +16,7 @@ window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
 });
 
+
 //rectangle/square
 // ctx.fillStyle = "rgba(255, 0, 0, .5";
 // ctx.fillRect(100, 100, 100, 100); //rectangle takes the fillstyle that precedes it

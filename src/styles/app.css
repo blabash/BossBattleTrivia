@@ -29,3 +29,13 @@ button {
     top: 20%;
     right: 50%;
 }
+
+audio {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
+iframe {
+    display: none;
+}
