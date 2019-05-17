@@ -15,3 +15,17 @@ body {
   width: 1000px;
   -webkit-mask-image: radial-gradient(ellipse 95% 120% at 65% 40%, black 25%, transparent 50%);
 }
+
+h1 {
+    color: orangered;
+    position: absolute;
+    top: 10%;
+    right: 50%;
+}
+
+button {
+    color: orangered;
+    position: absolute;
+    top: 20%;
+    right: 50%;
+}
