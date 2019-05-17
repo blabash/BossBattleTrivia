@@ -1,4 +1,5 @@
 import './styles/app.css';
+import Background from '../scripts/background';
 
 console.log("working");
 
@@ -7,6 +8,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let ctx = canvas.getContext('2d');
+
+Background(ctx); 
 
 //rectangle/square
 // ctx.fillStyle = "rgba(255, 0, 0, .5";
@@ -40,54 +43,58 @@ let ctx = canvas.getContext('2d');
 //     ctx.stroke();
 // }
 
-function Circle(x, y, dx, dy, radius) {
-    this.x = x;
-    this.y = y;
-    this.dx = dx;
-    this.dy = dy;
-    this.radius = radius;
+window.addEventListener('mousemove', () => {
+    
+})
 
-    this.draw = function() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        ctx.fillStyle = "rgba(255, 0, 0, .1";
-        ctx.fill();
-    }
+// function Circle(x, y, dx, dy, radius) {
+//     this.x = x;
+//     this.y = y;
+//     this.dx = dx;
+//     this.dy = dy;
+//     this.radius = radius;
 
-    this.update = function() {
-        if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
-            this.dx = -this.dx;
-        }
+//     this.draw = function() {
+//         ctx.beginPath();
+//         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+//         ctx.fillStyle = "rgba(255, 0, 0, .1";
+//         ctx.fill();
+//     }
 
-        if (this.y + radius > innerHeight || this.y - radius < 0) {
-            this.dy = -this.dy;
-        }
-        this.x += this.dx;
-        this.y += this.dy;
+//     this.update = function() {
+//         if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
+//             this.dx = -this.dx;
+//         }
 
-        this.draw();
-    }
-}
+//         if (this.y + radius > innerHeight || this.y - radius < 0) {
+//             this.dy = -this.dy;
+//         }
+//         this.x += this.dx;
+//         this.y += this.dy;
 
-const circleArray = [];
+//         this.draw();
+//     }
+// }
 
-for (let i = 0; i < 100; i++) {
-    let radius = Math.random() * 30;
-    let x = Math.random() * (innerWidth - radius * 2) + radius;
-    let y = Math.random() * (innerHeight - radius * 2) + radius;
-    let dx = (Math.random() - .5) * 0.8;
-    let dy = (Math.random() - .5) * 2;
+// const circleArray = [];
 
-    circleArray.push(new Circle(x, y, dx, dy, radius));
-}
+// for (let i = 0; i < 100; i++) {
+//     let radius = Math.random() * 30;
+//     let x = Math.random() * (innerWidth - radius * 2) + radius;
+//     let y = Math.random() * (innerHeight - radius * 2) + radius;
+//     let dx = (Math.random() - .5) * 0.8;
+//     let dy = (Math.random() - .5) * 2;
 
-const animate = () => {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
+//     circleArray.push(new Circle(x, y, dx, dy, radius));
+// }
 
-    for (let i = 0; i < circleArray.length; i++) {
-        circleArray[i].update();
-    }
-}
+// const animate = () => {
+//     requestAnimationFrame(animate);
+//     ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-module.exports = animate;
+//     for (let i = 0; i < circleArray.length; i++) {
+//         circleArray[i].update();
+//     }
+// }
+
+// animate();
