@@ -44,12 +44,12 @@ const messages = {
 }
 
 document.getElementById('startBtn').addEventListener('click', () => {
-    startBtn.style.display = 'none';
+    document.getElementById('startBtn').style.display = 'none';
     newGame();
 });
 
 document.getElementById('startOverBtn').addEventListener('click', () => {
-    startOverBtn.style.display = 'none';
+    document.getElementById('startOverBtn').style.display = 'none';
     newGame();
 });
 
@@ -72,24 +72,26 @@ function newQuestion() {
 
     //sets up new questions & answerList
     document.getElementById('currentQuestion').innerHTML = 'Question #' + (currentQuestion + 1) + '/' + triviaQuestions.length;
-    document.getElementsByClassName('question').innerHTML = '<h2>' + triviaQuestions[currentQuestion].question + '</h2>';
+    document.getElementById('question').innerHTML = triviaQuestions[currentQuestion].question
     for (let i = 0; i < 4; i++) {
-        let choices = document.createElement('div');
-        choices.textContent = triviaQuestions[currentQuestion].answerList[i];
-        choices.setAttribute('data-index', i);
-        choices.setAttribute('id', 'thisChoice');
-        // choices.classList.add('thisChoice');
-        document.getElementById('answerList').appendChild(choices)
+        let choice = document.createElement('button');
+        choice.innerHTML = triviaQuestions[currentQuestion].answerList[i];
+        choice.setAttribute('index', i);
+        choice.classList.add('thisChoice');
+        // choice.classList.add('thisChoice');
+        document.getElementById('answerList').appendChild(choice)
     }
     countdown();
     //clicking an answer will pause the time and setup answerPage
-    let thisChoice = document.getElementById('thisChoice');
-    // let thisChoice = document.getElementsByClassName('thisChoice');
-    thisChoice.addEventListener('click', () => {
-        userSelect = thisChoice.getAttribute('index');
-        clearInterval(time);
-        answerPage();
-    });
+    let thisChoice = document.getElementsByClassName('thisChoice');
+
+    for (let i = 0; i < thisChoice.length; i++) {
+        thisChoice[i].addEventListener('click', () => {
+            userSelect = thisChoice[i].getAttribute('index');
+            clearInterval(time);
+            answerPage();
+        });
+    }
 }
 
 function countdown() {
@@ -148,7 +150,7 @@ function scoreboard() {
     document.getElementById('correctAnswers').innerHTML = "Correct Answers: " + correctAnswer;
     document.getElementById('incorrectAnswers').innerHTML = "Incorrect Answers: " + incorrectAnswer;
     document.getElementById('unanswered').innerHTML = "Unanswered: " + unanswered;
-    document.getElementById("starOverBtn").className = "reset";
+    document.getElementById('startOverBtn').style.visibility = "visible";
+    document.getElementById('startOverBtn').classList.add('reset');
     document.getElementById('startOverBtn').style.display = 'block';
-    document.getElementById('startOverBtn').innerHTML = 'Start Over?';
 }
