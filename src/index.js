@@ -37,7 +37,7 @@ let answered;
 let userSelect;
 
 const messages = {
-    correct: "Yes, that's right",
+    correct: "Yep, that's right",
     incorrect: "No, that's not it.",
     endTime: "Out of time!",
     finished: "Let's see how you did."
@@ -77,17 +77,16 @@ function newQuestion() {
         let choice = document.createElement('button');
         choice.innerHTML = triviaQuestions[currentQuestion].answerList[i];
         choice.setAttribute('index', i);
-        choice.classList.add('thisChoice');
-        // choice.classList.add('thisChoice');
+        choice.classList.add('questionChoices');
         document.getElementById('answerList').appendChild(choice)
     }
     countdown();
     //clicking an answer will pause the time and setup answerPage
-    let thisChoice = document.getElementsByClassName('thisChoice');
+    let questionChoices = document.getElementsByClassName('questionChoices');
 
-    for (let i = 0; i < thisChoice.length; i++) {
-        thisChoice[i].addEventListener('click', () => {
-            userSelect = thisChoice[i].getAttribute('index');
+    for (let i = 0; i < questionChoices.length; i++) {
+        questionChoices[i].addEventListener('click', () => {
+            userSelect = questionChoices[i].getAttribute('index');
             clearInterval(time);
             answerPage();
         });
@@ -113,9 +112,10 @@ function showCountdown() {
 }
 
 function answerPage() {
-    document.getElementById('currentQuestion').innerHTML = '';
-    document.getElementsByClassName('thisChoice').innerHTML = '';
-    document.getElementsByClassName('question').innerHTML = '';
+    let answers = document.getElementsByClassName('questionChoices');
+    for (let i = 0; i < answers.length; i++) {
+        answers[i].className += ' disabled';
+    }
 
     let rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
     let rightAnswerIndex = triviaQuestions[currentQuestion].answer;
@@ -133,6 +133,13 @@ function answerPage() {
         document.getElementById('correctedAnswer').innerHTML = 'The correct answer was: ' + rightAnswerText;
         answered = true;
     }
+
+    setTimeout(() => {
+        while (answers.length > 0) {
+            answers[0].parentNode.removeChild(answers[0]);
+        }
+        document.getElementById('question').innerHTML = '';
+    }, 5000)
 
     if (currentQuestion == (triviaQuestions.length - 1)) {
         setTimeout(scoreboard, 5000)
