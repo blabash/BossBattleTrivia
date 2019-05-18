@@ -9,17 +9,56 @@
 <body>
     <div class ="canvas-container">
         <canvas id="canvas"></canvas>
-        <script src="./bundle.js"></script>
         
         <video id="video" loop autoplay muted>
             <source src="./assets/the-firelord.webm" type="video/webm">
         </video>
     </div>
-    
-    <iframe src="assets/1secondofsilence.mp3" allow="autoplay" id="one-sec-silence"></iframe>
-    <audio id="player" autoplay controls><source src="assets/RagnarosBossBattle(64kbps).mp3" type="audio/mp3"></audio>
-    
-    <h1>Boss Battle Trivia</h1>
-    
+    <div class='game-container'>
+        <h1>Boss Battle Trivia</h1>
+        <iframe src="assets/1secondofsilence.mp3" allow="autoplay" id="one-sec-silence"></iframe>
+        <audio id="player" autoplay loop controls><source src="assets/RagnarosBossBattle(64kbps).mp3" type="audio/mp3"></audio>
+        <button class='btn btn-primary' id='startBtn'>Fire it Up</button>
+        <!-- Question page -->
+        <div id=timeLeft></div>
+        <div id=currentQuestion></div>
+        <div class='question'></div>
+        <div id='answerList'></div>
+        <!-- Answer Page -->
+        <div id=message></div>
+        <div id=correctedAnswer></div>
+        <!-- Scoreboard -->
+        <div id=finalMessage></div>
+        <div id=correctAnswers></div>
+        <div id=incorrectAnswers></div>
+        <div id=unanswered></div>
+        <div id='startOverBtn'></div>
+    </div>
+    <script src="./bundle.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

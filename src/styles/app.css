@@ -5,37 +5,50 @@ canvas {
 
 body {
     margin: 0;
+    color: orangered;
+}
+
+iframe {
+    display: none;
+}
+
+audio {
+    display: none;
 }
 
 #video {
   position:absolute;
   top: 0%;
   right: 0%;
-  height: 600px;
+  height: 550px;
   width: 1000px;
   -webkit-mask-image: radial-gradient(ellipse 95% 120% at 65% 40%, black 25%, transparent 50%);
 }
 
-h1 {
-    color: orangered;
-    position: absolute;
-    top: 10%;
-    right: 50%;
+.btn-primary,.reset{
+	background-color: #030424;
+	color: orangered;
+	font-family: 'Sigmar One', sans-serif;
+	font-size: 30px;
+	padding: 20px;
+	margin-top: 100px;
+}
+.btn-primary:hover, .reset:hover{
+	background-color: #202364;
 }
 
-button {
-    color: orangered;
-    position: absolute;
-    top: 20%;
-    right: 50%;
-}
-
-audio {
+.game-container{
     position: absolute;
     top: 0%;
     left: 0%;
 }
 
-iframe {
-    display: none;
+h2, #message, #finalMessage{
+	font-family: Sigmar One;
+}
+
+.thisChoice:hover{
+	background-color: #202364;
+	color: white;
+	padding: 10px;
 }
