@@ -46,6 +46,7 @@ function newGame() {
     correctAnswer = 0;
     incorrectAnswer = 0;
     unanswered = 0;
+    updateHealthbar();
     newQuestion();
 }
 
@@ -106,6 +107,7 @@ function answerPage() {
     //checks to see correct, incorrect, or unanswered
     if ((userSelect == rightAnswerIndex) && (answered == true)) {
         correctAnswer++;
+        updateHealthbar();
         document.getElementById('message').innerHTML = messages.correct;
     } else if ((userSelect != rightAnswerIndex) && (answered == true)) {
         incorrectAnswer++;
@@ -130,6 +132,21 @@ function answerPage() {
     } else {
         currentQuestion++;
         setTimeout(newQuestion, 5000);
+    }
+}
+
+function updateHealthbar() {
+    let width = 100 - (100 * correctAnswer / triviaQuestions.length);
+    var elem = document.getElementById("myBar");
+
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width++;
+            elem.style.width = width + '%';
+        }
     }
 }
 
