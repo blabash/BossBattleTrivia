@@ -39,6 +39,7 @@ function getStarted() {
     document.getElementById('startBtn').addEventListener('click', () => {
         document.getElementById('start-screen-container').style.display = 'none';
         document.getElementById('rag-video').classList.add('visible');
+        randomRagTauntSound();
         playBattleMusic();
         newGame();
     });
@@ -47,11 +48,13 @@ function getStarted() {
         document.getElementById('startOverBtn').style.display = 'none';
         document.getElementById('rag-video').classList.remove('hidden');
         document.getElementById('rag-video').classList.add('visible');
+        randomRagTauntSound();
         newGame();
     });
 }
 
 function newGame() {
+    document.getElementById('game-container').classList.add('fade-in');
     document.getElementById('finalMessage').innerHTML = '';
     document.getElementById('correctAnswers').innerHTML = '';
     document.getElementById('incorrectAnswers').innerHTML = '';
@@ -150,6 +153,7 @@ function answerPage() {
     }, 5000)
 
     if (currentQuestion == (triviaQuestions.length - 1) && (unanswered + incorrectAnswer < 1)) { //change 1 to 3
+        document.getElementById('game-container').classList.remove('fade-in');
         setTimeout(randomRagDeathSound, 5500);
         setTimeout(scoreboard, 5000)
         setTimeout(() => {
@@ -157,6 +161,7 @@ function answerPage() {
         }, 5500)
         won = true;
     } else if (unanswered + incorrectAnswer === 1) { // change 1 to 3
+        document.getElementById('game-container').classList.remove('fade-in');
         setTimeout(randomRagTauntSound, 5500);
         setTimeout(scoreboard, 5000);
         won = false;
@@ -198,6 +203,7 @@ function updateHealthbar(from, to, speed) {
 
 function scoreboard() {
     setSpawnRate(75);
+    document.getElementById('game-container').classList.add('fade-in');
     document.getElementById('currentQuestion').innerHTML = '';
     document.getElementById('timeLeft').innerHTML = '';
     document.getElementById('message').innerHTML = '';
