@@ -47,7 +47,7 @@ function newGame() {
     document.getElementById('incorrectAnswers').innerHTML = '';
     document.getElementById('unanswered').innerHTML = '';
     currentQuestion = 0;
-    correctAnswer = 0;
+    setCorrectAnswers(0);
     incorrectAnswer = 0;
     unanswered = 0;
     updateHealthbar();
@@ -112,7 +112,7 @@ function answerPage() {
     let rightAnswerIndex = triviaQuestions[currentQuestion].answer;
     //checks to see correct, incorrect, or unanswered
     if ((userSelect == rightAnswerIndex) && (answered == true)) {
-        correctAnswer++;
+        setCorrectAnswers(correctAnswer+1);
         updateHealthbar();
         document.getElementById('message').innerHTML = messages.correct;
     } else if ((userSelect != rightAnswerIndex) && (answered == true)) {
@@ -143,17 +143,32 @@ function answerPage() {
     }
 }
 
-function updateHealthbar() {
-    let width = 100 - (100 * correctAnswer / triviaQuestions.length);
+function setCorrectAnswers(n)
+{
+   if (typeof(correctAnswer) == 'undefined')
+      updateHealthbar(triviaQuestions.length, 0, 2);
+   else
+      updateHealthbar(correctAnswer, n, 10);
+
+   correctAnswer = n;
+}
+
+
+function updateHealthbar(from, to, speed) {
+    let fromWidth = 100 - (100 * from / triviaQuestions.length);
+    let toWidth   = 100 - (100 * to / triviaQuestions.length);
+
     var elem = document.getElementById("myBar");
 
-    var id = setInterval(frame, 10);
+    var id = setInterval(frame, speed);
     function frame() {
-        if (width >= 100) {
-            clearInterval(id);
-        } else {
-            width++;
-            elem.style.width = width + '%';
+        inc = (fromWidth > toWidth) ? -1 : 1;
+
+        if (fromWidth == toWidth || toWidth > 100 || toWidth < 0)
+           clearInterval(id);
+        else {
+           fromWidth += inc;
+           elem.style.width = fromWidth + '%';
         }
     }
 }

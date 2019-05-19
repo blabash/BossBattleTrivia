@@ -68,12 +68,18 @@ h2, #message, #finalMessage{
 }
 
 #myProgress {
-  width: 100%;
+  top: 550px;
+  position: absolute;
+  right: 150px;
   background-color: grey;
+}
+
+#myBarContainer {
+   width: 450px;
 }
 
 #myBar {
   width: 1%;
   height: 30px;
-  background-color: green;
+  background-color: red;
 }
