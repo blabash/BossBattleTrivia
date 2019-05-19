@@ -16,13 +16,34 @@ audio {
     /* display: none; */
 }
 
-#video {
-  position:absolute;
+#rag-video {
+  opacity: 0;
+  position: absolute;
   top: 0%;
   right: 0%;
   height: 550px;
   width: 1000px;
   -webkit-mask-image: radial-gradient(ellipse 95% 120% at 65% 40%, black 25%, transparent 50%);
+}
+
+#rag-video.visible {
+  opacity: 1;
+  
+    -webkit-transition: opacity 3s ease-in;
+         -moz-transition: opacity 3s ease-in;
+          -ms-transition: opacity 3s ease-in;
+           -o-transition: opacity 3s ease-in;
+              transition: opacity 3s ease-in;
+}
+
+#rag-video.hidden {
+  opacity: 0;
+  
+    -webkit-transition: opacity 4s ease-out;
+         -moz-transition: opacity 4s ease-out;
+          -ms-transition: opacity 4s ease-out;
+           -o-transition: opacity 4s ease-out;
+              transition: opacity 4s ease-out;
 }
 
 .btn-primary,.reset{

@@ -37,11 +37,14 @@ const messages = {
 function getStarted() {
     document.getElementById('startBtn').addEventListener('click', () => {
         document.getElementById('startBtn').style.display = 'none';
+        document.getElementById('rag-video').classList.add('visible');
         newGame();
     });
     
     document.getElementById('startOverBtn').addEventListener('click', () => {
         document.getElementById('startOverBtn').style.display = 'none';
+        document.getElementById('rag-video').classList.remove('hidden');
+        document.getElementById('rag-video').classList.add('visible');
         newGame();
     });
 }
@@ -123,7 +126,7 @@ function answerPage() {
         updateHealthbar();
         document.getElementById('message').innerHTML = messages.correct;
     } else if ((userSelect != rightAnswerIndex) && (answered == true)) {
-        setSpawnRate(5); //make lava scary
+        setSpawnRate(2); //make lava scary
         randomRagTauntSound();
         incorrectAnswer++;
         document.getElementById('message').innerHTML = messages.incorrect;
@@ -143,11 +146,14 @@ function answerPage() {
         document.getElementById('question').innerHTML = '';
     }, 5000)
 
-    if (currentQuestion == (triviaQuestions.length - 1)) {
+    if (currentQuestion == (triviaQuestions.length - 1) && (unanswered + incorrectAnswer < 1)) { //change 1 to 3
         setTimeout(randomRagDeathSound, 5500);
         setTimeout(scoreboard, 5000)
+        setTimeout(() => {
+            document.getElementById('rag-video').classList.add('hidden');
+        }, 5500)
         won = true;
-    } else if (unanswered + incorrectAnswer === 1) {
+    } else if (unanswered + incorrectAnswer === 1) { // change 1 to 3
         setTimeout(randomRagTauntSound, 5500);
         setTimeout(scoreboard, 5000);
         won = false;
