@@ -87,7 +87,7 @@ function MiniLava(x, y, radius, color) {
         x: utils.randomIntFromRange(-5, 5),
         y: utils.randomIntFromRange(-15, 15)
     }
-    this.friction = .9;
+    this.friction = 1.2;
     this.ttl = 100; //time to live
     this.opacity = 1;
 }
