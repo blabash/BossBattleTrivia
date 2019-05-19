@@ -7,34 +7,38 @@
     <title>BossBattleTrivia</title>
 </head>
 <body>
+    <!-- Audio Tags -->
+    <iframe src="assets/1secondofsilence.mp3" allow="autoplay" id="one-sec-silence"></iframe>
+    <audio id="battle-music" loop><source src="assets/RagnarosBossBattle(64kbps).mp3" type="audio/mp3"></audio>
+    <audio id="rag-laugh-07"><source src="assets/RagnarosBase_Laugh07.mp3" type="audio/mp3"></audio>
+    <audio id="rag-laugh-12"><source src="assets/RagnarosBase_Laugh12.mp3" type="audio/mp3"></audio>
+    <audio id="rag-laugh-14"><source src="assets/RagnarosBase_Laugh14.mp3" type="audio/mp3"></audio>
+    <audio id="rag-pissed-01"><source src="assets/RagnarosBase_Pissed01.mp3" type="audio/mp3"></audio>
+    <audio id="rag-pissed-evo00"><source src="assets/RagnarosBase_Pissed_Evo00.mp3" type="audio/mp3"></audio>
+    <audio id="rag-death-00"><source src="assets/RagnarosBase_Death00.mp3" type="audio/mp3"></audio>
+    <audio id="rag-death-01"><source src="assets/RagnarosBase_Death01.mp3" type="audio/mp3"></audio>
+
+    <!--Background-->
     <div class ="canvas-container">
         <canvas id="canvas"></canvas>
         <video id="rag-video" loop autoplay muted>
             <source src="./assets/the-firelord.webm" type="video/webm">
         </video>
-        <div id="myProgress">
-          <div id="myBarContainer"></div>
-            <div id="myBar"></div>
-          </div>
-        </div>
     </div>
 
-    <div id="start-screen-container">
-
-    </div>
-
-    <div class='game-container'>
+    <!-- Title screen -->
+    <div class="fade-in" id="start-screen-container">
         <h1>Boss Battle Trivia</h1>
-        <iframe src="assets/1secondofsilence.mp3" allow="autoplay" id="one-sec-silence"></iframe>
-        <!-- <audio id="player" autoplay loop controls><source src="assets/RagnarosBossBattle(64kbps).mp3" type="audio/mp3"></audio> -->
-        <audio id="rag-laugh-07"><source src="assets/RagnarosBase_Laugh07.mp3" type="audio/mp3"></audio>
-        <audio id="rag-laugh-12"><source src="assets/RagnarosBase_Laugh12.mp3" type="audio/mp3"></audio>
-        <audio id="rag-laugh-14"><source src="assets/RagnarosBase_Laugh14.mp3" type="audio/mp3"></audio>
-        <audio id="rag-pissed-01"><source src="assets/RagnarosBase_Pissed01.mp3" type="audio/mp3"></audio>
-        <audio id="rag-pissed-evo00"><source src="assets/RagnarosBase_Pissed_Evo00.mp3" type="audio/mp3"></audio>
-        <audio id="rag-death-00"><source src="assets/RagnarosBase_Death00.mp3" type="audio/mp3"></audio>
-        <audio id="rag-death-01"><source src="assets/RagnarosBase_Death01.mp3" type="audio/mp3"></audio>
         <button class='btn btn-primary' id="startBtn">Fire it Up</button>
+    </div>
+
+    <!--Trivia Screen-->
+    <div class="fade-in" id='game-container'>
+        <!--Health Bars-->
+        <!-- <div id="myProgress">
+            <div id="myBarContainer"></div>
+            <div id="myBar"></div>
+        </div> -->
         <!-- Question page -->
         <div id="timeLeft"></div>
         <div id="currentQuestion"></div>
