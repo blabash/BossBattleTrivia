@@ -8,9 +8,9 @@ const colorArray = [ //flame color palette
 ];
 
 const starColorArray = [ //flame color palette
-    "rgb(255, 0, 0, .11)",
-    "rgb(255, 90, 0, .11)",
-    "rgb(255, 154, 0, .11)"
+    "#FBF063",
+    "#FF822F",
+    "#FF902E"
 ];
 
 //interactivity for when mouse is near circle
@@ -30,7 +30,7 @@ function Star(x, y, radius, color) {
     this.radius = radius;
     this.color = color;
     this.velocity = {
-        x: 0,
+        x: utils.randomIntFromRange(-4, -2),
         y: 3
     }
     this.friction = 0.8;
@@ -38,29 +38,34 @@ function Star(x, y, radius, color) {
 }
 
 Star.prototype.draw = function() {
+    ctx.save();
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     ctx.fillStyle = this.color;
+    ctx.shadowColor = 'rgba(255, 130, 47)';
+    ctx.shadowBlur = 30;
     ctx.fill();
     ctx.closePath();
+    ctx.restore();
 }
 
 Star.prototype.update = function() {
     this.draw();
 
-    if (this.y + this.radius + this.velocity.y > canvas.height) {
+    if (this.y + this.radius + this.velocity.y > canvas.height / 2) {
         this.velocity.y = -this.velocity.y * this.friction;
         this.shatter()
     } else {
         this.velocity.y += this.gravity;
     }
 
+    this.x += this.velocity.x;
     this.y += this.velocity.y;
 }
 
 const miniStarsArray = [];
 Star.prototype.shatter = function() {
-    this.radius -= 3;
+    this.radius -= 4;
     for(let i = 0; i < 8; i++) {
         miniStarsArray.push(new MiniStar(this.x, this.y, 2))
     }
@@ -79,11 +84,13 @@ function MiniStar(x, y, radius, color) {
 }
 
 MiniStar.prototype.draw = function () {
+    ctx.save();
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`
+    ctx.fillStyle = `rgba(255, 130, 47, ${this.opacity})`;
     ctx.fill();
     ctx.closePath();
+    ctx.restore();
 }
 
 MiniStar.prototype.update = function () {
@@ -111,10 +118,14 @@ function Circle(x, y, dx, dy, radius, ctx) {
     this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
     this.draw = function () {
+        this.ctx.save();
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         this.ctx.fillStyle = this.color;
+        this.ctx.shadowColor = 'rgba(255, 130, 47)';
+        this.ctx.shadowBlur = 40;
         this.ctx.fill();
+        this.ctx.restore();
     }
 
     this.update = function () {
@@ -147,11 +158,13 @@ function Background(ctx) {
     const backgroundGradient = this.ctx.createLinearGradient(0, 0, 0, innerHeight)
     backgroundGradient.addColorStop(0, 'rgb(3, 0, 12)')
     backgroundGradient.addColorStop(1, 'rgb(60, 20, 2)')
+    let ticker = 0;
+    let randomSpawnRate = 75;
 
     const circlesArray = [];
     
-    for (let i = 0; i < 100; i++) {
-        let radius = Math.random() * 30;
+    for (let i = 0; i < 150; i++) {
+        let radius = Math.random() * 20;
         let x = Math.random() * (innerWidth - radius * 2) + radius;
         let y = Math.random() * (innerHeight - radius * 2) + radius;
         let dx = (Math.random() - .5) * 0.5;
@@ -161,10 +174,6 @@ function Background(ctx) {
     }
 
     const starsArray = [];
-
-    for (let i = 0; i < 1; i++) {
-        starsArray.push(new Star(innerWidth / 2, 30, 30, 'blue'));
-    }
     
     const animate = () => {
         requestAnimationFrame(animate);
@@ -187,6 +196,13 @@ function Background(ctx) {
             if (miniStarsArray[i].ttl === 0) {
                 miniStarsArray.splice(i, 1)
             }
+        }
+        ticker++
+
+        if (ticker % randomSpawnRate === 0) {
+            const x = Math.random() * innerWidth * 2/3;
+            starsArray.push(new Star(x, -100, 12, utils.randomColor(starColorArray)))
+            randomSpawnRate = utils.randomIntFromRange(2,5);
         }
     }
     
