@@ -1,7 +1,13 @@
-
+const utils = require('./canvas_utils');
 
 
 const colorArray = [ //flame color palette
+    "rgb(255, 0, 0, .11)",
+    "rgb(255, 90, 0, .11)",
+    "rgb(255, 154, 0, .11)"
+];
+
+const starColorArray = [ //flame color palette
     "rgb(255, 0, 0, .11)",
     "rgb(255, 90, 0, .11)",
     "rgb(255, 154, 0, .11)"
@@ -18,6 +24,82 @@ const colorArray = [ //flame color palette
 //     mouse.y = e.y;
 // })
 
+function Star(x, y, radius, color) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.color = color;
+    this.velocity = {
+        x: 0,
+        y: 3
+    }
+    this.friction = 0.8;
+    this.gravity = 1;
+}
+
+Star.prototype.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.closePath();
+}
+
+Star.prototype.update = function() {
+    this.draw();
+
+    if (this.y + this.radius + this.velocity.y > canvas.height) {
+        this.velocity.y = -this.velocity.y * this.friction;
+        this.shatter()
+    } else {
+        this.velocity.y += this.gravity;
+    }
+
+    this.y += this.velocity.y;
+}
+
+const miniStarsArray = [];
+Star.prototype.shatter = function() {
+    this.radius -= 3;
+    for(let i = 0; i < 8; i++) {
+        miniStarsArray.push(new MiniStar(this.x, this.y, 2))
+    }
+}
+
+function MiniStar(x, y, radius, color) {
+    Star.call(this, x, y, radius, color)
+    this.velocity = {
+        x: utils.randomIntFromRange(-5, 5),
+        y: utils.randomIntFromRange(-15, 15)
+    }
+    this.friction = 0.8;
+    this.gravity = .5;
+    this.ttl = 100;
+    this.opacity = 1;
+}
+
+MiniStar.prototype.draw = function () {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`
+    ctx.fill();
+    ctx.closePath();
+}
+
+MiniStar.prototype.update = function () {
+    this.draw();
+
+    if (this.y + this.radius + this.velocity.y > canvas.height) {
+        this.velocity.y = -this.velocity.y * this.friction;
+    } else {
+        this.velocity.y += this.gravity;
+    }
+
+    this.y += this.velocity.y;
+    this.x += this.velocity.x;
+    this.ttl -= 1;
+    this.opacity -= 1 / this.ttl;
+}
 
 function Circle(x, y, dx, dy, radius, ctx) {
     this.x = x;
@@ -60,11 +142,13 @@ function Circle(x, y, dx, dy, radius, ctx) {
     }
 }
 
-
 function Background(ctx) {
     this.ctx = ctx;
+    const backgroundGradient = this.ctx.createLinearGradient(0, 0, 0, innerHeight)
+    backgroundGradient.addColorStop(0, 'rgb(3, 0, 12)')
+    backgroundGradient.addColorStop(1, 'rgb(60, 20, 2)')
 
-    const circleArray = [];
+    const circlesArray = [];
     
     for (let i = 0; i < 100; i++) {
         let radius = Math.random() * 30;
@@ -73,15 +157,36 @@ function Background(ctx) {
         let dx = (Math.random() - .5) * 0.5;
         let dy = (Math.random() - .5) * 0.3;
     
-        circleArray.push(new Circle(x, y, dx, dy, radius, this.ctx));
+        circlesArray.push(new Circle(x, y, dx, dy, radius, this.ctx));
+    }
+
+    const starsArray = [];
+
+    for (let i = 0; i < 1; i++) {
+        starsArray.push(new Star(innerWidth / 2, 30, 30, 'blue'));
     }
     
     const animate = () => {
         requestAnimationFrame(animate);
-        this.ctx.clearRect(0, 0, innerWidth, innerHeight);
+        this.ctx.fillStyle = backgroundGradient;
+        this.ctx.fillRect(0, 0, innerWidth, innerHeight);
     
-        for (let i = 0; i < circleArray.length; i++) {
-            circleArray[i].update();
+        for (let i = 0; i < circlesArray.length; i++) {
+            circlesArray[i].update();
+        }
+
+        for (let i = 0; i < starsArray.length; i++) {
+            starsArray[i].update();
+            if (starsArray[i].radius === 0) {
+                starsArray.splice(i,  1)
+            }
+        }
+
+        for (let i = 0; i < miniStarsArray.length; i++) {
+            miniStarsArray[i].update();
+            if (miniStarsArray[i].ttl === 0) {
+                miniStarsArray.splice(i, 1)
+            }
         }
     }
     
