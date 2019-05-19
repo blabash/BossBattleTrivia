@@ -14,4 +14,3 @@ function distance(x1, y1, x2, y2) {
 }
 
 module.exports = { randomIntFromRange, randomColor, distance }
-//from https://github.com/christopher4lis/canvas-boilerplate/blob/master/src/js/utils.js

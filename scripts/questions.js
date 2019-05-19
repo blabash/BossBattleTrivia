@@ -1,3 +1,7 @@
+const backgroundMethods = require('./background');
+const setGravity = backgroundMethods.setGravity;
+const setSpawnRate = backgroundMethods.setSpawnRate;
+
 var triviaQuestions = [{
     question: "In what year was the Molten Core raid released?",
     answerList: ["2002", "2003", "2005", "2004"],
@@ -51,6 +55,8 @@ function newGame() {
 }
 
 function newQuestion() {
+    setGravity(3); //set lava back to non-scary mode
+    setSpawnRate(75); //set lava back to non-scary mode
     document.getElementById('message').innerHTML = '';
     document.getElementById('correctedAnswer').innerHTML = '';
     answered = true;
@@ -110,10 +116,14 @@ function answerPage() {
         updateHealthbar();
         document.getElementById('message').innerHTML = messages.correct;
     } else if ((userSelect != rightAnswerIndex) && (answered == true)) {
+        setGravity(8); //make lava scary
+        setSpawnRate(5);
         incorrectAnswer++;
         document.getElementById('message').innerHTML = messages.incorrect;
         document.getElementById('correctedAnswer').innerHTML = 'The correct answer was: ' + rightAnswerText;
     } else {
+        setGravity(8); //make lava scary
+        setSpawnRate(5); 
         unanswered++;
         document.getElementById('message').innerHTML = messages.endTime;
         document.getElementById('correctedAnswer').innerHTML = 'The correct answer was: ' + rightAnswerText;
@@ -151,6 +161,7 @@ function updateHealthbar() {
 }
 
 function scoreboard() {
+    setGravity(3);
     document.getElementById('currentQuestion').innerHTML = '';
     document.getElementById('timeLeft').innerHTML = '';
     document.getElementById('message').innerHTML = '';

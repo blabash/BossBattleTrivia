@@ -7,7 +7,7 @@ const colorArray = [ //flame color palette
     "rgb(255, 154, 0, .11)"
 ];
 
-const starColorArray = [ //flame color palette
+const lavaColorArray = [ //flame color palette
     "#FBF063",
     "#FF822F",
     "#FF902E"
@@ -24,7 +24,7 @@ const starColorArray = [ //flame color palette
 //     mouse.y = e.y;
 // })
 
-function Star(x, y, radius, color) {
+function Lava(x, y, radius, color) {
     this.x = x;
     this.y = y;
     this.radius = radius;
@@ -34,10 +34,9 @@ function Star(x, y, radius, color) {
         y: 3
     }
     this.friction = 0.8;
-    this.gravity = 1;
 }
 
-Star.prototype.draw = function() {
+Lava.prototype.draw = function() {
     ctx.save();
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -49,41 +48,47 @@ Star.prototype.draw = function() {
     ctx.restore();
 }
 
-Star.prototype.update = function() {
+let gravity = 3;
+
+function setGravity(g) {
+    gravity = g;
+}
+
+Lava.prototype.update = function() {
     this.draw();
 
     if (this.y + this.radius + this.velocity.y > canvas.height / 2) {
         this.velocity.y = -this.velocity.y * this.friction;
         this.shatter()
     } else {
-        this.velocity.y += this.gravity;
+        this.velocity.y += gravity;
     }
 
     this.x += this.velocity.x;
     this.y += this.velocity.y;
 }
 
-const miniStarsArray = [];
-Star.prototype.shatter = function() {
+const miniLavasArray = [];
+Lava.prototype.shatter = function() {
     this.radius -= 4;
-    for(let i = 0; i < 8; i++) {
-        miniStarsArray.push(new MiniStar(this.x, this.y, 2))
+    for(let i = 0; i < 4; i++) {
+        miniLavasArray.push(new MiniLava(this.x, this.y, 2))
     }
 }
 
-function MiniStar(x, y, radius, color) {
-    Star.call(this, x, y, radius, color)
+function MiniLava(x, y, radius, color) {
+    Lava.call(this, x, y, radius, color)
     this.velocity = {
         x: utils.randomIntFromRange(-5, 5),
         y: utils.randomIntFromRange(-15, 15)
     }
     this.friction = 0.8;
-    this.gravity = .5;
+    // this.gravity = .5;
     this.ttl = 100;
     this.opacity = 1;
 }
 
-MiniStar.prototype.draw = function () {
+MiniLava.prototype.draw = function () {
     ctx.save();
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -93,13 +98,13 @@ MiniStar.prototype.draw = function () {
     ctx.restore();
 }
 
-MiniStar.prototype.update = function () {
+MiniLava.prototype.update = function () {
     this.draw();
 
     if (this.y + this.radius + this.velocity.y > canvas.height) {
         this.velocity.y = -this.velocity.y * this.friction;
     } else {
-        this.velocity.y += this.gravity;
+        this.velocity.y += gravity;
     }
 
     this.y += this.velocity.y;
@@ -153,13 +158,17 @@ function Circle(x, y, dx, dy, radius, ctx) {
     }
 }
 
+let spawnRate = 75;
+function setSpawnRate(rate) {
+    spawnRate = rate
+}
+
 function Background(ctx) {
     this.ctx = ctx;
     const backgroundGradient = this.ctx.createLinearGradient(0, 0, 0, innerHeight)
     backgroundGradient.addColorStop(0, 'rgb(3, 0, 12)')
     backgroundGradient.addColorStop(1, 'rgb(60, 20, 2)')
     let ticker = 0;
-    let randomSpawnRate = 75;
 
     const circlesArray = [];
     
@@ -173,7 +182,7 @@ function Background(ctx) {
         circlesArray.push(new Circle(x, y, dx, dy, radius, this.ctx));
     }
 
-    const starsArray = [];
+    const lavasArray = [];
     
     const animate = () => {
         requestAnimationFrame(animate);
@@ -184,32 +193,36 @@ function Background(ctx) {
             circlesArray[i].update();
         }
 
-        for (let i = 0; i < starsArray.length; i++) {
-            starsArray[i].update();
-            if (starsArray[i].radius === 0) {
-                starsArray.splice(i,  1)
+        for (let i = 0; i < lavasArray.length; i++) {
+            lavasArray[i].update();
+            if (lavasArray[i].radius === 0) {
+                lavasArray.splice(i,  1)
             }
         }
 
-        for (let i = 0; i < miniStarsArray.length; i++) {
-            miniStarsArray[i].update();
-            if (miniStarsArray[i].ttl === 0) {
-                miniStarsArray.splice(i, 1)
+        for (let i = 0; i < miniLavasArray.length; i++) {
+            miniLavasArray[i].update();
+            if (miniLavasArray[i].ttl === 0) {
+                miniLavasArray.splice(i, 1)
             }
         }
+
         ticker++
-
-        if (ticker % randomSpawnRate === 0) {
+        if (ticker % spawnRate === 0) {
             const x = Math.random() * innerWidth * 2/3;
-            starsArray.push(new Star(x, -100, 12, utils.randomColor(starColorArray)))
-            randomSpawnRate = utils.randomIntFromRange(2,5);
+            lavasArray.push(new Lava(x, -100, 12, utils.randomColor(lavaColorArray)))
+            // spawnRate = utils.randomIntFromRange(2, 5);
         }
     }
     
     animate();
 }
 
-module.exports = Background;
+module.exports = {
+    Background: Background, 
+    setGravity: setGravity,
+    setSpawnRate: setSpawnRate
+};
 
 //canvas example code
 //rectangle/square

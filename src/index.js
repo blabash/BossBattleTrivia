@@ -1,8 +1,8 @@
 import './styles/app.css';
-import Background from '../scripts/background';
+const backgroundMethods = require('../scripts/background');
+const Background = backgroundMethods.Background;
+// import Background from '../scripts/background';
 import getStarted from '../scripts/questions';
-
-console.log("working");
 
 let canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
