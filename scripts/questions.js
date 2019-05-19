@@ -1,6 +1,10 @@
 const backgroundMethods = require('./background');
 const setGravity = backgroundMethods.setGravity;
 const setSpawnRate = backgroundMethods.setSpawnRate;
+const ragSounds = require('./sounds');
+const randomRagTauntSound = ragSounds.randomRagTauntSound;
+const randomRagMadSound = ragSounds.randomRagMadSound;
+const randomRagDeathSound = ragSounds.randomRagDeathSound;
 
 var triviaQuestions = [{
     question: "In what year was the Molten Core raid released?",
@@ -26,7 +30,8 @@ const messages = {
     correct: "Yep, that's right",
     incorrect: "No, that's not it.",
     endTime: "Out of time!",
-    finished: "Let's see how you did."
+    youWin: "You win...this time.",
+    youLose: "You are defeated."
 }
 
 function getStarted() {
@@ -102,6 +107,7 @@ function showCountdown() {
     }
 }
 
+let won;
 function answerPage() {
     let answers = document.getElementsByClassName('questionChoices');
     for (let i = 0; i < answers.length; i++) {
@@ -112,11 +118,13 @@ function answerPage() {
     let rightAnswerIndex = triviaQuestions[currentQuestion].answer;
     //checks to see correct, incorrect, or unanswered
     if ((userSelect == rightAnswerIndex) && (answered == true)) {
+        randomRagMadSound();
         setCorrectAnswers(correctAnswer+1);
         updateHealthbar();
         document.getElementById('message').innerHTML = messages.correct;
     } else if ((userSelect != rightAnswerIndex) && (answered == true)) {
         setSpawnRate(5); //make lava scary
+        randomRagTauntSound();
         incorrectAnswer++;
         document.getElementById('message').innerHTML = messages.incorrect;
         document.getElementById('correctedAnswer').innerHTML = 'The correct answer was: ' + rightAnswerText;
@@ -136,7 +144,13 @@ function answerPage() {
     }, 5000)
 
     if (currentQuestion == (triviaQuestions.length - 1)) {
+        setTimeout(randomRagDeathSound, 5500);
         setTimeout(scoreboard, 5000)
+        won = true;
+    } else if (unanswered + incorrectAnswer === 1) {
+        setTimeout(randomRagTauntSound, 5500);
+        setTimeout(scoreboard, 5000);
+        won = false;
     } else {
         currentQuestion++;
         setTimeout(newQuestion, 5000);
@@ -179,7 +193,11 @@ function scoreboard() {
     document.getElementById('timeLeft').innerHTML = '';
     document.getElementById('message').innerHTML = '';
     document.getElementById('correctedAnswer').innerHTML = '';
-    document.getElementById('finalMessage').innerHTML = messages.finished;
+    if (won) {
+        document.getElementById('finalMessage').innerHTML = messages.youWin;    
+    } else {
+        document.getElementById('finalMessage').innerHTML = messages.youLose;    
+    }
     document.getElementById('correctAnswers').innerHTML = "Correct Answers: " + correctAnswer;
     document.getElementById('incorrectAnswers').innerHTML = "Incorrect Answers: " + incorrectAnswer;
     document.getElementById('unanswered').innerHTML = "Unanswered: " + unanswered;
