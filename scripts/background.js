@@ -33,7 +33,7 @@ function Lava(x, y, radius, color) {
         x: utils.randomIntFromRange(-4, -2),
         y: 3
     }
-    this.friction = 0.8;
+    this.friction = 0.6;
 }
 
 Lava.prototype.draw = function() {
@@ -57,9 +57,10 @@ function setGravity(g) {
 Lava.prototype.update = function() {
     this.draw();
 
-    if (this.y + this.radius + this.velocity.y > canvas.height / 2) {
-        this.velocity.y = -this.velocity.y * this.friction;
-        this.shatter()
+    if ((this.y + this.radius + this.velocity.y > canvas.height / 2) &&
+        (this.x + this.radius > canvas.width / 5)) { //lava only bounces over designated horizontal part of the screen
+            this.velocity.y = -this.velocity.y * this.friction;
+            this.shatter()
     } else {
         this.velocity.y += gravity;
     }
@@ -82,9 +83,8 @@ function MiniLava(x, y, radius, color) {
         x: utils.randomIntFromRange(-5, 5),
         y: utils.randomIntFromRange(-15, 15)
     }
-    this.friction = 0.8;
-    // this.gravity = .5;
-    this.ttl = 100;
+    this.friction = 1.5;
+    this.ttl = 100; //time to live
     this.opacity = 1;
 }
 
@@ -101,8 +101,9 @@ MiniLava.prototype.draw = function () {
 MiniLava.prototype.update = function () {
     this.draw();
 
-    if (this.y + this.radius + this.velocity.y > canvas.height) {
-        this.velocity.y = -this.velocity.y * this.friction;
+    if ((this.y + this.radius + this.velocity.y > canvas.height / 2) && 
+        (this.x + this.radius > canvas.width / 5)) {
+            this.velocity.y = -this.velocity.y * this.friction;
     } else {
         this.velocity.y += gravity;
     }
