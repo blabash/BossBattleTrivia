@@ -1,3 +1,10 @@
+/* @font-face {
+  font-family: 'lifeCraftRegular';
+  src: url('../../assets/lifecraft_font.ttf') format('truetype'),
+    url('../../assets/lifecraft_font-webfont.woff') format('woff'),
+    url('../../assets/lifecraft_font-webfont.woff2') format('woff2');
+} */
+
 canvas {
     border: 1px solid black;
     /* background: rgb(3, 0, 12); */
@@ -6,6 +13,7 @@ canvas {
 body {
     margin: 0;
     color: orangered;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .fade-in {
@@ -31,6 +39,7 @@ iframe {
 audio {
     /* display: none; */
 }
+
 
 #rag-video {
   opacity: 0;
@@ -63,32 +72,29 @@ audio {
 }
 
 .btn-primary,.reset{
-	background-color: #030424;
-	color: orangered;
-	font-family: 'Sigmar One', sans-serif;
+	background-color: orangered;
+	color: white;
 	font-size: 30px;
 	padding: 20px;
   margin-top: 100px;
 }
 
 .btn-primary:hover, .reset:hover{
-	background-color: #202364;
+	background-color: orangered;
 }
 
 #start-screen-container{
     position: absolute;
-    top: 0%;
-    left: 20%;
+    top: 32%;
+    left: 34%;
+    text-align: center;
 }
 
 #game-container{
     position: absolute;
+    text-align: center;
     top: 0%;
     left: 20%;
-}
-
-h2, #message, #finalMessage{
-	font-family: Sigmar One;
 }
 
 .questionChoices:hover{
@@ -98,7 +104,7 @@ h2, #message, #finalMessage{
 }
 
 .questionChoices{
-	background-color: #202364;
+	background-color: orangered;
 	color: white;
 	padding: 10px;
 }
@@ -123,6 +129,58 @@ h2, #message, #finalMessage{
   width: 1%;
   height: 30px;
   background-color: red;
+}
+
+/* Reset */
+button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  outline: 0;
+  -webkit-appearance: none;
+}
+
+/* Custom from https://www.designskilz.com/cool-css-buttons/ */
+button {
+  font-family: 'Press Start 2P', cursive;
+  display: inline-block;
+  position: relative;
+  padding: 20px 38px;
+  margin: 10px;
+  top: 0;
+  font-size: 30px;
+  color: white;
+  border-radius: 4px;
+  border-bottom: 3px solid rgba(251, 240, 99, 0.5);
+  background: rgba( 22, 230, 137, 1 );
+  box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
+  
+  -webkit-transform: translateZ(0);
+     -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+          transform: translateZ(0);
+  
+  -webkit-transition: all 0.2s ease;
+     -moz-transition: all 0.2s ease;
+      -ms-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+}
+
+button:hover {
+  top: -10px;
+  box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
+  
+  -webkit-transform: rotateX(20deg);
+     -moz-transform: rotateX(20deg);
+      -ms-transform: rotateX(20deg);
+          transform: rotateX(20deg);
+}
+
+button:active {
+  top: 0px;
+  box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
+  background: #FBF063;
 }
 
 @keyframes fadein {

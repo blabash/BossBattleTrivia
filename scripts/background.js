@@ -1,13 +1,13 @@
 const utils = require('./canvas_utils');
 
 
-const colorArray = [ //flame color palette
+const colorArray = [ //background flame color palette
     "rgb(255, 0, 0, .11)",
     "rgb(255, 90, 0, .11)",
     "rgb(255, 154, 0, .11)"
 ];
 
-const lavaColorArray = [ //flame color palette
+const lavaColorArray = [ //lava color palette
     "#FBF063",
     "#FF822F",
     "#FF902E"
@@ -30,7 +30,7 @@ function Lava(x, y, radius, color) {
     this.radius = radius;
     this.color = color;
     this.velocity = {
-        x: utils.randomIntFromRange(-4, -2),
+        x: utils.randomIntFromRange(-6, -2),
         y: 3
     }
     this.friction = 0.4;
@@ -58,11 +58,11 @@ Lava.prototype.update = function() {
     this.draw();
 
     if ((this.y + this.radius + this.velocity.y > canvas.height / 2) &&
-        (this.x + this.radius > canvas.width / 5)) { //lava only bounces over designated horizontal part of the screen
+        (this.x + this.radius > canvas.width / 1)) { //lava only bounces over designated horizontal part of the screen
             this.velocity.y = -this.velocity.y * this.friction;
             this.shatter()
     } else if ((this.y + this.radius + this.velocity.y > canvas.height) &&
-        (this.x + this.radius < canvas.width / 5)) {
+        (this.x + this.radius < canvas.width / 1)) {
             this.velocity.y = -this.velocity.y * this.friction;        
             this.shatter()
     } else {
@@ -106,10 +106,10 @@ MiniLava.prototype.update = function () {
     this.draw();
 
     if ((this.y + this.radius + this.velocity.y > canvas.height / 2) && 
-        (this.x + this.radius > canvas.width / 5)) {
+        (this.x + this.radius > canvas.width / 1)) {
             this.velocity.y = -this.velocity.y * this.friction;
     } else if ((this.y + this.radius + this.velocity.y > canvas.height) && 
-        (this.x + this.radius < canvas.width / 5)) {
+        (this.x + this.radius < canvas.width / 1)) {
             this.velocity.y = -this.velocity.y * this.friction;
     } else {
         this.velocity.y += gravity;
@@ -217,7 +217,7 @@ function Background(ctx) {
 
         ticker++
         if (ticker % spawnRate === 0) {
-            const x = Math.random() * innerWidth * 2/3;
+            const x = Math.random() * innerWidth * 3/4;
             lavasArray.push(new Lava(x, -100, 12, utils.randomColor(lavaColorArray)))
             // spawnRate = utils.randomIntFromRange(2, 5);
         }

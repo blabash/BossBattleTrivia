@@ -60,15 +60,18 @@ function newGame() {
     document.getElementById('incorrectAnswers').innerHTML = '';
     document.getElementById('unanswered').innerHTML = '';
     currentQuestion = 0;
-    setCorrectAnswers(0);
+    // setCorrectAnswers(0);
     incorrectAnswer = 0;
     unanswered = 0;
-    updateHealthbar();
+    // updateHealthbar();
     newQuestion();
 }
 
 function newQuestion() {
-    setGravity(3); 
+    setGravity(3);
+    document.getElementById('currentQuestion').classList.remove('disabled');
+    document.getElementById('question').classList.remove('disabled');
+    document.getElementById('timeLeft').classList.remove('disabled'); 
     setSpawnRate(75); //set lava back to non-scary mode
     document.getElementById('message').innerHTML = '';
     document.getElementById('correctedAnswer').innerHTML = '';
@@ -91,6 +94,9 @@ function newQuestion() {
     for (let i = 0; i < questionChoices.length; i++) {
         questionChoices[i].addEventListener('click', () => {
             userSelect = questionChoices[i].getAttribute('index');
+            document.getElementById('currentQuestion').classList.add('disabled');
+            document.getElementById('question').classList.add('disabled');
+            document.getElementById('timeLeft').classList.add('disabled');
             clearInterval(time);
             answerPage();
         });
@@ -128,8 +134,8 @@ function answerPage() {
     //checks to see correct, incorrect, or unanswered
     if ((userSelect == rightAnswerIndex) && (answered == true)) {
         randomRagMadSound();
-        setCorrectAnswers(correctAnswer+1);
-        updateHealthbar();
+        // setCorrectAnswers(correctAnswer+1);
+        // updateHealthbar();
         document.getElementById('message').innerHTML = messages.correct;
     } else if ((userSelect != rightAnswerIndex) && (answered == true)) {
         setSpawnRate(2); //make lava scary
@@ -171,35 +177,35 @@ function answerPage() {
     }
 }
 
-function setCorrectAnswers(n)
-{
-   if (typeof(correctAnswer) == 'undefined')
-      updateHealthbar(triviaQuestions.length, 0, 2);
-   else
-      updateHealthbar(correctAnswer, n, 10);
+// function setCorrectAnswers(n)
+// {
+//    if (typeof(correctAnswer) == 'undefined')
+//       updateHealthbar(triviaQuestions.length, 0, 2);
+//    else
+//       updateHealthbar(correctAnswer, n, 10);
 
-   correctAnswer = n;
-}
+//    correctAnswer = n;
+// }
 
 
-function updateHealthbar(from, to, speed) {
-    let fromWidth = 100 - (100 * from / triviaQuestions.length);
-    let toWidth   = 100 - (100 * to / triviaQuestions.length);
+// function updateHealthbar(from, to, speed) {
+//     let fromWidth = 100 - (100 * from / triviaQuestions.length);
+//     let toWidth   = 100 - (100 * to / triviaQuestions.length);
 
-    var elem = document.getElementById("myBar");
+//     var elem = document.getElementById("myBar");
 
-    var id = setInterval(frame, speed);
-    function frame() {
-        inc = (fromWidth > toWidth) ? -1 : 1;
+//     var id = setInterval(frame, speed);
+//     function frame() {
+//         inc = (fromWidth > toWidth) ? -1 : 1;
 
-        if (fromWidth == toWidth || toWidth > 100 || toWidth < 0)
-           clearInterval(id);
-        else {
-           fromWidth += inc;
-           elem.style.width = fromWidth + '%';
-        }
-    }
-}
+//         if (fromWidth == toWidth || toWidth > 100 || toWidth < 0)
+//            clearInterval(id);
+//         else {
+//            fromWidth += inc;
+//            elem.style.width = fromWidth + '%';
+//         }
+//     }
+// }
 
 function scoreboard() {
     setSpawnRate(75);
