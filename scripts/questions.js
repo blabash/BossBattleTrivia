@@ -35,7 +35,7 @@ var triviaQuestions = [{
     answer: 2
 },
 {
-    question: "Who build Karazhan?",
+    question: "Who built Karazhan?",
     answerList: ["Archimonde", "Medivh", "Kel'thuzad", "Arthas Menethil"],
     answer: 1
 },
@@ -80,7 +80,7 @@ var triviaQuestions = [{
     answer: 0
 },
 {
-    question: "What non-combat vanity pet is completely unattainable by Horde players? (There is only one.)?",
+    question: "What non-combat vanity pet is completely unobtainable by Horde players? (there is only one)",
     answerList: ["White Kitten", "Prairie Chicken", "Sprite Darter", "Red Moth"],
     answer: 2
 },
@@ -90,13 +90,13 @@ var triviaQuestions = [{
     answer: 2
 },
 {
-    question: "The entrance to Blackwing Lair is found inside what instance?",
+    question: "The entrance to Blackwing Lair is found inside which instance?",
     answerList: ["Upper Blackrock Spire", "Blackrock Depths", "Molten Core", "Onyxia's Lair"],
     answer: 0
 },
 {
     question: "What zone contains the settlement of Darkshire?",
-    answerList: ["Deadwin Pass", "Duskwood", "Swamp of Sorrows", "Redridge Mountains"],
+    answerList: ["Deadwind Pass", "Duskwood", "Swamp of Sorrows", "Redridge Mountains"],
     answer: 1
 },
 {
@@ -106,7 +106,7 @@ var triviaQuestions = [{
 },
 {
     question: "What profession uses the fish Oily Blackmouth?",
-    answerList: ["Alechmy", "Herbalism", "Cooking", "Jewelcrafting"],
+    answerList: ["Alchemy", "Herbalism", "Cooking", "Jewelcrafting"],
     answer: 0
 },
 {
