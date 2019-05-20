@@ -217,7 +217,7 @@ function Background(ctx) {
 
         ticker++
         if (ticker % spawnRate === 0) {
-            const x = Math.random() * innerWidth * 3/4;
+            const x = (innerWidth * 1/4) + Math.random() * innerWidth * 1/2; //make lava only spawn in middle of screen
             lavasArray.push(new Lava(x, -100, 12, utils.randomColor(lavaColorArray)))
             // spawnRate = utils.randomIntFromRange(2, 5);
         }

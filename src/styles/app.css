@@ -16,6 +16,10 @@ body {
     font-family: 'Press Start 2P', cursive;
 }
 
+#main-title {
+  font-size: 60px;
+}
+
 .fade-in {
   -webkit-animation: fadein 3s; 
        -moz-animation: fadein 3s; 
@@ -51,6 +55,15 @@ audio {
   -webkit-mask-image: radial-gradient(ellipse 95% 120% at 65% 40%, black 25%, transparent 50%);
 }
 
+button#toggle-music-button {
+    position: absolute;
+    height: 40px;
+    width: 60px;
+    font-size: 10px;
+    background-color: orangered;
+    padding: 10px;
+}
+
 #rag-video.visible {
   opacity: 1;
     
@@ -72,29 +85,54 @@ audio {
 }
 
 .btn-primary,.reset{
-	background-color: orangered;
-	color: white;
-	font-size: 30px;
-	padding: 20px;
-  margin-top: 100px;
+	  background-color: orangered;
+    color: white;
+    font-size: 30px;
+    padding: 20px;
+    /* margin-top: 20px;
+    left: 27%; */
+}
+
+button#startBtn {
+    left: 1%;
+}
+
+button#startOverBtn {
+    left: 13%;
 }
 
 .btn-primary:hover, .reset:hover{
 	background-color: orangered;
 }
 
+
 #start-screen-container{
     position: absolute;
-    top: 32%;
-    left: 34%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
+div#incorrectAnswers {
+    padding: 10px;
+}
+
+div#question {
+    padding: 10px;
+}
+
 #game-container{
-    position: absolute;
-    text-align: center;
-    top: 0%;
-    left: 20%;
+   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+div#finalMessage {
+    margin: 10px;
+    font-size: 30px;
 }
 
 .questionChoices:hover{
