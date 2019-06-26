@@ -89,22 +89,11 @@ button#toggle-music-button {
     color: white;
     font-size: 30px;
     padding: 20px;
-    /* margin-top: 20px;
-    left: 27%; */
-}
-
-button#startBtn {
-    left: 1%;
 }
 
 button#startOverBtn {
     left: 13%;
 }
-
-.btn-primary:hover, .reset:hover{
-	background-color: orangered;
-}
-
 
 #start-screen-container{
     position: absolute;
@@ -133,12 +122,6 @@ div#question {
 div#finalMessage {
     margin: 10px;
     font-size: 30px;
-}
-
-.questionChoices:hover{
-	background-color: orangered;
-	color: white;
-	padding: 10px;
 }
 
 .questionChoices{
@@ -206,19 +189,14 @@ button {
 }
 
 button:hover {
-  top: -10px;
+  top: -3px;
+  
   box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
   
   -webkit-transform: rotateX(20deg);
      -moz-transform: rotateX(20deg);
       -ms-transform: rotateX(20deg);
           transform: rotateX(20deg);
-}
-
-button:active {
-  top: 0px;
-  box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
-  background: #FBF063;
 }
 
 @keyframes fadein {
