@@ -7,7 +7,6 @@ const randomRagMadSound = ragSounds.randomRagMadSound;
 const randomRagDeathSound = ragSounds.randomRagDeathSound;
 const playBattleMusic = ragSounds.playBattleMusic;
 const pauseIntroMusic = ragSounds.pauseIntroMusic;
-const battleMusicToggle = ragSounds.battleMusicToggle;
 
 var triviaQuestions = [{
     question: "In what year was the Molten Core raid released?",
@@ -206,7 +205,6 @@ function getStarted() {
     document.getElementById('startBtn').addEventListener('click', () => {
         document.getElementById('start-screen-container').style.display = 'none';
         document.getElementById('rag-video').classList.add('visible');
-        battleMusicToggle(true);
         pauseIntroMusic();
         randomRagTauntSound();
         playBattleMusic();
