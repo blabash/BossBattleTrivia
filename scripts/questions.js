@@ -184,6 +184,7 @@ var triviaQuestions = [{
     answer: 2
 },];
 
+let currentQuestionNumber;
 let currentQuestion;
 let correctAnswer;
 let incorrectAnswer;
@@ -192,6 +193,7 @@ let seconds;
 let time;
 let answered;
 let userSelect;
+let chosenQuestions = [];
 
 const messages = {
     correct: "Yep, that's right",
@@ -226,10 +228,11 @@ function newGame() {
     document.getElementById('correctAnswers').innerHTML = '';
     document.getElementById('incorrectAnswers').innerHTML = '';
     document.getElementById('unanswered').innerHTML = '';
-    currentQuestion = 0;
+    currentQuestionNumber = 0;
     setCorrectAnswers(0);
     incorrectAnswer = 0;
     unanswered = 0;
+    chosenQuestions.length = 0;
     // updateHealthbar();
     newQuestion();
 }
@@ -245,7 +248,16 @@ function newQuestion() {
     answered = true;
 
     //sets up new questions & answerList
-    document.getElementById('currentQuestion').innerHTML = 'Question #' + (currentQuestion + 1) + '/' + triviaQuestions.length;
+    let randomQuestionIdx = () => Math.floor(Math.random() * 1000) % triviaQuestions.length; 
+
+    currentQuestion = randomQuestionIdx();
+    
+    while(chosenQuestions.includes(currentQuestion)) {
+        currentQuestion = randomQuestionIdx();
+    }
+    chosenQuestions.push(currentQuestion);
+
+    document.getElementById('currentQuestion').innerHTML = 'Question #' + (currentQuestionNumber + 1) + '/' + '20';
     document.getElementById('question').innerHTML = triviaQuestions[currentQuestion].question
     for (let i = 0; i < 4; i++) {
         let choice = document.createElement('button');
@@ -328,7 +340,7 @@ function answerPage() {
         document.getElementById('question').innerHTML = '';
     }, 5000)
 
-    if (currentQuestion == (triviaQuestions.length - 1) && (unanswered + incorrectAnswer < 3)) { //change 1 to 3
+    if (currentQuestionNumber == (19) && (unanswered + incorrectAnswer < 3)) { //change 1 to 3
         document.getElementById('game-container').classList.remove('fade-in');
         setTimeout(randomRagDeathSound, 5500);
         setTimeout(scoreboard, 5000)
@@ -342,7 +354,7 @@ function answerPage() {
         setTimeout(scoreboard, 5000);
         won = false;
     } else {
-        currentQuestion++;
+        currentQuestionNumber++;
         setTimeout(newQuestion, 5000);
     }
 }
