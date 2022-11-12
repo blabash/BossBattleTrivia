@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "gsap": "^2.1.2",
-    "resolve-url-loader": "^3.1.0",
+    "resolve-url-loader": "^5.0.0",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"
   },
